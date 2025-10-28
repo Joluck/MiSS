@@ -1,7 +1,7 @@
 <div align="center" >
     <img src="assets/logo.png" height=120 alt="" style="margin-bottom:px"/> 
 
-**MiSS: Balancing LoRA Performance and Efficiency with Simple Shard Sharing**
+**MiSS: Revisiting the Trade-off in LoRA with an Efficient Shard-Sharing Structure**
 
 [![arXiv](https://img.shields.io/badge/arXiv-2409.15371-b31b1b.svg)](https://arxiv.org/abs/2409.15371)
 <a href="https://github.com/huggingface/trl/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/github/license/huggingface/trl.svg?color=blue"></a>
@@ -27,12 +27,12 @@ MiSS (Matrix Shard Sharing) is a novel Parameter-Efficient Fine-Tuning (PEFT) me
 
 
 ## 🚀News
-- **\[2025.06.13\]** Our paper was accepted by ES-Fomo III workshop @ICML2025! 🔥🔥🔥
-- **\[2025.05.16\]** We released a new version of our paper!(MiSS) 🔥🔥🔥
-- **\[2024.12.31\]** We released a new version of our paper!(DiSHA) 🔥🔥🔥
-- **\[2024.11.05\]** Merged into the Hugging Face PEFT repo! 🔥🔥🔥
-- **\[2024.09.19\]** Our paper was available on ArXiv!(Bone) 🔥🔥🔥
-- **\[2024.08.07\]** First proposed the Bone method! 🔥🔥🔥
+- **\[2025.06.13\]** Our paper was accepted by ES-Fomo III workshop @ICML2025! 
+- **\[2025.05.16\]** We released a new version of our paper!(MiSS) 
+- **\[2024.12.31\]** We released a new version of our paper!(DiSHA) 
+- **\[2024.11.05\]** Merged into the Hugging Face PEFT repo! 
+- **\[2024.09.19\]** Our paper was available on ArXiv!(Bone) 
+- **\[2024.08.07\]** First proposed the Bone method! 
 
 ## 🔧Installation
 ### HF Model
@@ -147,8 +147,8 @@ The term $\mathcal{W}_0 \times \mathcal{D}$ introduces shard-dependent perturbat
 If you find this repo useful, please consider citing our works:
 # Citation
 ```bib
-@misc{kang2025balancingloraperformanceefficiency,
-      title={Balancing LoRA Performance and Efficiency with Simple Shard Sharing}, 
+@misc{kang2025missrevisitingtradeofflora,
+      title={MiSS: Revisiting the Trade-off in LoRA with an Efficient Shard-Sharing Structure}, 
       author={Jiale Kang and Qingyu Yin},
       year={2025},
       eprint={2409.15371},
