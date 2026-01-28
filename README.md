@@ -27,6 +27,7 @@ MiSS (Matrix Shard Sharing) is a novel Parameter-Efficient Fine-Tuning (PEFT) me
 
 
 ## 🚀News
+- **\[2026.01.26\]** Our paper was accepted by ICLR2026
 - **\[2025.06.13\]** Our paper was accepted by ES-Fomo III workshop @ICML2025! 
 - **\[2025.05.16\]** We released a new version of our paper!(MiSS) 
 - **\[2024.12.31\]** We released a new version of our paper!(DiSHA) 
@@ -49,55 +50,33 @@ git clone https://github.com/JL-er/MiSS.git
 cd MiSS
 sh scripts/run_miss.sh
 ```
-### RWKV Model
-```
-git clone https://github.com/JL-er/RWKV-PEFT.git
-```
-You can check the script settings in the Bone/rwkv-ft file and replace them in the RWKV-PEFT/scripts directory.
-```
-cd RWKV-PEFT
-pip install -r requirements.txt
-sh scripts/run_bone.sh
-sh scripts/merge_bone.sh
-```
+
 ### Advanced Usage
 ```
-import torch
-import os
-from peft import BoneConfig, get_peft_model
-from transformers import AutoTokenizer, AutoModelForCausalLM
-MODEL_ID = "meta-llama/Llama-2-7b-hf"
-model = AutoModelForCausalLM.from_pretrained(MODEL_ID, torch_dtype=torch.bfloat16, device_map="auto")
-tokenizer = AutoTokenizer.from_pretrained(MODEL_ID)
-tokenizer.pad_token_id = tokenizer.eos_token_id
-bone_config = BoneConfig(
-    r=64,
-    target_modules=["q_proj", "o_proj", "k_proj", "v_proj", "gate_proj", "up_proj", "down_proj"],
-    task_type="CAUSAL_LM",
+from transformers import AutoModelForCausalLM
+from peft import MissConfig, TaskType, get_peft_model
+
+device = torch.accelerator.current_accelerator().type if hasattr(torch, "accelerator") else "cuda"
+model_id = "Qwen/Qwen2.5-3B-Instruct"
+model = AutoModelForCausalLM.from_pretrained(model_id, device_map=device)
+peft_config = MissConfig(
+    r=16,
+    task_type=TaskType.CAUSAL_LM,
+    # target_modules=["q_proj", "v_proj", ...]  # optionally indicate target modules
 )
-peft_model = get_peft_model(model, bone_config)
-peft_model.print_trainable_parameters()
-OUTPUT_DIR="Bone-Llama-2-7b-hf-r64"
-# Save Bone modules:
-peft_model.peft_config["default"].init_lora_weights = True # Important
-peft_model.save_pretrained(OUTPUT_DIR)
-# Save residual model:
-peft_model = peft_model.unload()
-peft_model.save_pretrained(OUTPUT_DIR)
-# Save the tokenizer:
-tokenizer.save_pretrained(OUTPUT_DIR)
+model = get_peft_model(model, peft_config)
+model.print_trainable_parameters()
+# prints: trainable params: 3,686,400 || all params: 3,089,625,088 || trainable%: 0.1193
+
+# now perform training on your dataset, e.g. using transformers Trainer, then save the model
+model.save_pretrained("qwen2.5-3b-miss")
 ```
 <p>
   <img src="./assets/from.png"/>
+  <img src="./assets/space.png"/>
 </p>
 
 
-|Metohd|Space|Time|
-|:--------------:|:--------------:|:--------------:|
-|Full |O(dk) |O(bld(d + k))
-|LoRA |O(dr + rk) |O(blr(d + k))
-|MISS |O(dr) |O(bldk)
-|MISS_e |O(dr)| O(blr(d +kr))
 
 ### PEFT Arena
 <p>
