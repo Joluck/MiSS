@@ -7,7 +7,7 @@
 <a href="https://github.com/huggingface/trl/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/github/license/huggingface/trl.svg?color=blue"></a>
 
 [🤗PEFT](https://github.com/huggingface/peft/tree/main/src/peft/tuners/bone) |
-[📑Paper](https://arxiv.org/abs/2409.15371) |
+[📑Paper](https://arxiv.org/abs/2409.15371)(ICLR'25 Poster) |
 [📘Documentation](https://huggingface.co/docs/peft/main/package_reference/bone) |
 [🛠️Installation](https://huggingface.co/docs/peft/install#source) |
 [❓Issues](https://github.com/JL-er/MiSS/issues/new/choose)
